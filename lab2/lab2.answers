@@ -1,0 +1,6 @@
+--[1.1]
+1. As process "A" is the parent process, when terminated via SIGKILL, all of its children {"B", "C"} will be adopted by init (pid=1) process
+
+2. show_pstree invokes system () library wrapper function, that creates a new process via fork, and overwrites its data using a variation of execve () system call, with `/bin/sh` binary to call `pstree` utility.
+show_pstree (pid) -> pid holds the return value of fork, thus the process id of child process
+show_pstree (getpid()) -> getpid() returns process id of current process, thus parent in this situation.

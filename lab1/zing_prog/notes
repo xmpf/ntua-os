@@ -1,0 +1,52 @@
+- shared libraries : general object code that many executables require in linkage phase
+- ccache
+- forward declarations
+
+-headers
+
+The main reason headers exist is to share declarations among multiple source files.
+
+- #pragma once
+
+Αυτη η εντολή εξασφαλίζει ότι κάθε δηλωθείσα συνάρτηση σε ένα header δεν θα γίνει include παραπάνω
+από μία φορά σε ένα πρόγραμμα.
+
+---------
+File "grandparent.h"
+
+struct foo {
+    int member;
+};
+---------
+File "parent.h"
+
+#include "grandparent.h"
+---------
+File "child.c"
+
+#include "grandparent.h"
+#include "parent.h"
+
+Στο παραπάνω πρόγραμμα οι γραμμές του grandparent.h γίνονται include 2 φορές με αποτέλεσμα να έχουμε compilation errors.
+
+- #ifndef
+  #define 
+  #endif
+
+Η παραπάνω εντολές με την αντίστοιχη ονοματοδοσία που δίνει ο προγραμματιστής επιτελούν τον ίδιο σκοπό με το #pragma once.
+Προτείνεται γενικά η χρήση του #pragma once, αφού μπορεί να προκύψουν θέματα με την ονοματοδοσία σε διαφορετικά headers και μη inclusion 
+διαφορετικών συναρτήσεων.
+
+-getLogin()
+
+getlogin()  returns  a  pointer  to a string containing the name of the
+user logged in on the controlling terminal of the process,  or  a  null
+pointer if this information cannot be determined.  The string is stati‐
+cally allocated and might be overwritten on subsequent  calls  to  this
+function or to cuserid().
+
+
+- gcc -c main.c : produces compiled object code main.o
+
+- everything is a file philosophy
+- 

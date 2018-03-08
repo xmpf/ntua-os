@@ -1,0 +1,67 @@
+- fcntl.h
+In order to include symbolic constants like:
+	O_CREAT     Create file if it does not exist.
+	O_APPEND    Set append mode.
+	O_RDONLY    Open for reading only.
+	O_RDWR      Open for reading and writing.
+	O_WRONLY    Open for writing only.
+
+- opmode 666
+
+!!!Devil's mode!!!
+
+permission to:  owner      group      other     
+                /¯¯¯\      /¯¯¯\      /¯¯¯\
+octal:            6          6          6
+binary:         1 1 0      1 1 0      1 1 0
+what to permit: r w x      r w x      r w x
+
+binary         - 1: enabled, 0: disabled
+
+what to permit - r: read, w: write, x: execute
+
+permission to  - owner: the user that create the file/folder
+                 group: the users from group that owner is member
+                 other: all other users
+
+===================== <unistd.h> ===================================
+DESCRIPTION
+        - The <unistd.h> header defines miscellaneous symbolic constants and types, and declares miscellaneous functions.
+
+System call (wrapper functions)
+	- access()
+	- close()
+	- open()
+	- read()
+	- write()
+	- ...
+====================== <strace> =====================================
+strace: trace system calls and signals
+"And programmers will find that since system calls and signals are events  that  happen  at the user/kernel interface, 
+a close examination of this boundary is very useful for bug isolation, sanity checking and attempting to capture race conditions." -- man 1 strace
+
+According to the errors:
+- access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory) <0.000013>
+- access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory) <0.000010>
+
+These are configuration files.
+	/etc/ld.so.preload
+		File containing a whitespace-separated list of ELF shared libraries to be loaded before the program.
+	/etc/ld.so.nohwcap
+		Hardware capabilities / optimizations.
+
+> ld.so = dynamic linker/loader
+This program finds and loads shared objects (*.so) needed by a program to be run.
+
+Thus, those errors are unrelated with our program and should not bother us at all.
+
+================== <mmap> ==============================
+ESCRIPTION
+       The mmap() function shall establish a mapping between an address space of a process and a memory object.
+egular files
+
+Supports:
+	*  Regular files
+        *  Shared memory objects
+        *  Typed memory objects
+

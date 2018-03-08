@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/mandel.dir/mandel.c.o CMakeFiles/mandel.dir/mandel-lib.c.o  -o mandel -lm -lpthread 

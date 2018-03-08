@@ -1,0 +1,13 @@
+About to increase variable 10000000 times
+About to decrease variable 10000000 times
+Done increasing variable.
+Done decreasing variable.
+OK, val = 0.
+./simplesync-mutex  0.89s user 0.00s system 31% cpu 2.842 total
+
+About to decrease variable 10000000 times
+About to increase variable 10000000 times
+Done decreasing variable.
+Done increasing variable.
+OK, val = 0.
+./simplesync-atomic  0.32s user 0.00s system 32% cpu 0.983 total

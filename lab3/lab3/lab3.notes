@@ -1,0 +1,32 @@
+Lab3: Synchronization
+======================
+
+use:
+	- mutexes
+	- semaphores
+	- condition variables
+	- gcc builtins atomic operations
+
+[1.1 :: simplesync.c]
+	- makefile ?
+	- %f-{atomic, mutex}
+	- apply synchronization mechanisms to both implementations
+	- /home/oslab/code/sync
+
+Questions:
+	- time benchmarks
+	- gcc -g -S > produce assembly code w/ debugging info
+	- https://godbolt.org/
+
+[1-2 :: Mandelbrot]
+	- mandel.c
+	- mandel-lib{.c,.h}
+	- row split
+	- semaphores
+	- cat /proc/cpuinfo
+
+[1-3 :: Kindergarten]
+	- child_enter()
+	- teacher_exit()
+	- kgarten.c
+

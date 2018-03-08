@@ -1,0 +1,47 @@
+SIGCHLD:
+The SIGCHLD signal is sent to a parent process whenever one of its children termi-
+nates. By default, this signal is ignored, but we can catch it by installing a signal handler.
+Within the signal handler, we can use wait() (or similar) to reap the zombie child.
+These type of signals are not queued => if a second and third child terminate in quick
+succession while a SIGCHLD handler is executing for an already terminated child,
+then, although SIGCHLD is generated twice, it is queued only once to the parent. As a
+result, if the parent’s SIGCHLD handler called wait() only once each time it was
+invoked, the handler might fail to reap some zombie children.
+The solution is to loop inside the SIGCHLD handler, repeatedly calling waitpid()
+with the WNOHANG flag until there are no more dead children to be reaped. Often, the
+body of a SIGCHLD handler simply consists of the following code, which reaps any
+dead children without checking their status.
+
+WAIT/WAITPID:
+Using wait() and waitpid() (and other related functions), a parent process can
+obtain the status of its terminated and stopped children. This status indicates
+whether a child process terminated normally (with an exit status indicating either
+success or failure), terminated abnormally, was stopped by a signal, or was resumed
+by a SIGCONT signal.
+A common way of reaping dead child processes is to establish a handler for the
+SIGCHLD signal. This signal is delivered to a parent process whenever one of its chil-
+dren terminates, and optionally when a child is stopped by a signal.
+
+
+SIGCHLD:
+This signal is sent (by the kernel) to a parent process when one of its children
+terminates (either by calling exit() or as a result of being killed by a signal).
+It may also be sent to a process when one of its children is stopped or
+resumed by a signal.
+
+SIGCONT:
+When sent to a stopped process, this signal causes the process to resume
+(i.e., to be rescheduled to run at some later time). When received by a pro-
+cess that is not currently stopped, this signal is ignored by default. A process
+may catch this signal, so that it carries out some action when it resumes.
+
+The  kill()  system  call can be used to send any signal to any process
+group or process. If pid is positive, then signal sig is sent to the process with the  ID
+specified by pid.
+
+alarm()  arranges  for  a SIGALRM signal to be delivered to the calling process in seconds seconds.
+
+Disabling interrupts:
+Σε συστηματα με 1 επεξεργαστη, ευκολη λυση για εξασφαλιση αποκλειστικής προσβασης σε κρισιμη περιοχη, ειναι η απενεργοποιηση των interrupts πριν την κρισιμη περιοχη και ενεργοποιηση τους αμεσως μετα - ωστε να μη μεταφερθει αλλη διεργασία στη CPU.
+Σε multiprocessor συστηματα, η απενεργοποιηση των διακοπων γινεται σε καθε επεξεργαστη που εκτελει την disable_interrupts().
+Η μεθοδος που χρησιμοποιειται σε τετοια συστηματα ειναι συνηθως το κλειδωμα του memory bus (hardware support).

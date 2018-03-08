@@ -1,0 +1,3 @@
+/home/ishtar/mountpoint/lab3/solutions/mandelbrot/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ishtar/mountpoint/lab3/solutions/mandelbrot/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ishtar/mountpoint/lab3/solutions/mandelbrot/cmake-build-debug/CMakeFiles/mandel.dir
